@@ -1,0 +1,61 @@
+<div class="text-black bg-white mb-3 table-bordered">
+    <div class="card-header"> {{ title }} </div>
+    <div class="card-body"></div>
+        <form >
+            <div class="form-group row">
+                <label for="Nombre" class="col-form-label col-sm-2" style="text-align: center;" > Nombre: </label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="client.name" name="Nombre"  minlength="3" #Nombre="ngModel">
+                    <div class="alert alert-danger" *ngIf="Nombre.invalid && (Nombre.dirty || Nombre.touched)">
+                        <div *ngIf="Nombre.errors.required">
+                            Campo Nombre es obligatorio.
+                        </div>
+                        <div *ngIf="Nombre.errors.minlength">
+                            Campo Nombre debe contener al menos 3 letras.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Apellido" class="col-form-label col-sm-2" style="text-align: center;"> Apellidos: </label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="client.lastName" name="Apellido" required #Apellido="ngModel">
+                    <div class="alert alert-danger" *ngIf="Apellido.invalid && (Apellido.dirty || Apellido.touched)">
+                        <div *ngIf="Apellido.errors.required">
+                            Campo Apellido es obligatorio.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Email" class="col-form-label col-sm-2" style="text-align: center;"> Email:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="client.email" name="Email" email #Email="ngModel">
+                    <div class="alert alert-danger" *ngIf="Email.invalid && (Email.dirty || Email.touched)">
+                        <div *ngIf="Email.errors.email">
+                            Campo Email debe tener un formato valido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Telefono" class="col-form-label col-sm-2" style="text-align: center;"> Telefono: </label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="client.phoneNumber" name="Telefono"  required #Telefono="ngModel">
+                    <div class="alert alert-danger" *ngIf="Telefono.invalid && (Telefono.dirty || Telefono.touched)">
+                        <div *ngIf="Telefono.errors.required">
+                            Campo Telefono es obligatorio.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" style="text-align: center;">
+                <div class="col-sm-2" >
+                    <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!client.id else elseBlock ">Guardar</button>
+                    <ng-template #elseBlock>
+                        <button class="btn btn-primary" role="button" (click)='update()'>Guardar</button>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+</div>
