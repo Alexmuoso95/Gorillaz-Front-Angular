@@ -17,10 +17,10 @@ export class FormComponent implements OnInit {
   
   constructor(private clientService: ClientService, private router : Router, private activatedRoute : ActivatedRoute) { }
   ngOnInit(): void {
-    this.cargarClient();
+    this.loadClient();
   }
 
-  public cargarClient() : void {
+  public loadClient() : void {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       if(id){
@@ -32,7 +32,7 @@ export class FormComponent implements OnInit {
   public create() : void{
     this.clientService.createClient(this.client).subscribe(client =>{
       swal.fire('Nuevo cliente' , `Cliente ${this.client.name} creado con exito!`, 'success');
-      this.router.navigate(['/clients']);
+      this.router.navigate(['/clients/page',0]);
     },
     err => {
       this.message = err.message;
@@ -46,13 +46,14 @@ export class FormComponent implements OnInit {
       .subscribe(client =>{
         this.router.navigate(['/clients']);
         swal.fire('Cliente Actualizado' , `Cliente ${this.client.name} actualizado con exito!`, 'success');
+        this.router.navigate(['/clients/page',0]);
     });
   }
   public delete() : void{
     this.clientService.deleteClient(this.client.id)
       .subscribe(client =>{
-        this.router.navigate(['/clients']);
         swal.fire('Cliente Eliminado' , `Cliente ${this.client.name} eliminado con exito!`, 'success');
+        this.router.navigate(['/clients/page']);
     });
   }
 }

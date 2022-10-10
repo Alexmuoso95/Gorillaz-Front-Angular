@@ -13,8 +13,7 @@
                 <th>Correo Electronico</th>
                 <th>Telefono</th>
                 <th>Fecha de Registro</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -23,18 +22,18 @@
                 <td>{{client.name}} {{client.middleName}} {{client.lastName}}</td>
                 <td>{{client.phoneNumber}}</td>
                 <td>{{client.email}}</td>
-                <td>{{client.createAt}}</td>
+                <td>{{client.createAt | date:"EEEE dd, MMMM, yyyy"}}</td>
                 <td>
-                  <button type="button" name="Editar" [routerLink]="['./form', client.id]" class="btn btn-primary" >Editar</button>
-                </td>
-                <td>
-                  <button type="button" name="Eliminar" class="btn btn-danger" (click)='delete(client)'>Eliminar</button>
+                  <button type="button" name="Editar" [routerLink]="['/clients/form', client.id]" class="btn btn-primary btn-sm" style="margin: 5px"  >Editar</button>
+                  <button type="button" name="Eliminar" class="btn btn-danger btn-sm "  style="margin: 5px" (click)='delete(client)'>Eliminar</button>
                 </td>
             </tr>
         </tbody>
       </table>
+      <paginator-nav *ngIf="paginator" [paginator]="paginator" ></paginator-nav>
       <div *ngIf="clients?.length == 0 "  class="alert alert-info">
         No hay registros en la base de datos!
       </div>
     </div>
+   
 </div>

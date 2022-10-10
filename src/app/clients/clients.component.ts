@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from './client'
 import { ClientService } from './client.service';
 import  swall from 'sweetalert2';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clients',
@@ -12,14 +12,24 @@ import  swall from 'sweetalert2';
 export class ClientsComponent implements OnInit {
 
   clients : Client[] ;
+  paginator : any;
   
-  constructor(private clientService : ClientService) { }
+  constructor(private clientService : ClientService, private activatedRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.clientService.getClients().subscribe(
-      clients => this.clients = clients
-      );
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page : number = +params.get('page');
+      if(!page){
+        page=0;
+      }
+      this.clientService.getClientsPage(page).pipe(
+        ).subscribe(response =>{
+          this.clients = response.content as Client [];
+          this.paginator = response;
+        } );
+    })
   }
+
   delete(client : Client ): void {
     swall.fire({
       title: 'Estas segurisimo que quieres Eliminarlo ?',

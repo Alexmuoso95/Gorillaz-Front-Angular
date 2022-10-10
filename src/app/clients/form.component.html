@@ -49,9 +49,20 @@
                     </div>
                 </div>
             </div>
+            <!-- <div class="form-group row">
+                <label for="Fecha" class="col-form-label col-sm-2" style="text-align: center;"> Fecha de registro: </label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" [(ngModel)]="client.createAt" name="Fecha"  #Fecha="ngModel">
+                    <div class="alert alert-danger" *ngIf="Fecha.invalid && (Fecha.dirty || Fecha.touched)">
+                        <div *ngIf="Fecha.errors.required">
+                            Campo Fecha es obligatorio.
+                        </div>
+                    </div>
+                </div>
+            </div> -->
             <div class="form-group row" style="text-align: center;">
                 <div class="col-sm-2" >
-                    <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!client.id else elseBlock ">Guardar</button>
+                    <button class="btn btn-primary"  role="button" (click)='create()' *ngIf="!client.id else elseBlock">Guardar</button>
                     <ng-template #elseBlock>
                         <button class="btn btn-primary" role="button" (click)='update()'>Guardar</button>
                     </ng-template>
