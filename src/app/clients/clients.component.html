@@ -19,8 +19,9 @@
                 <td>{{client.phoneNumber}}</td>
                 <td>{{client.createAt | date:" dd-MM-yyyy"}}</td>
                 <td>
-                  <button type="button" name="Editar" [routerLink]="['/clients/form', client.id]" class="btn btn-secondary btn-sm" style="margin: 2p; font-size: x-small;"  >Editar</button>
-                  <button type="button" name="Eliminar" class="btn btn-danger btn-sm "  style="margin: 2px;  font-size: x-small;" (click)='delete(client)'>Eliminar</button>
+                  <button type="button" name="Eliminar" class="btn btn-info btn-sm "  style="margin: 3px;  font-size: x-small;" (click)='delete(client)'>Detalles</button>
+                  <button type="button" name="Editar" [routerLink]="['/clients/form', client.id]" class="btn btn-warning btn-sm" style="margin: 3px; font-size: x-small;"  >Editar</button>
+                  <button type="button" name="Eliminar" class="btn btn-danger btn-sm "  style="margin: 3px;  font-size: x-small;" (click)='delete(client)'>Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -30,7 +31,11 @@
         No hay registros en la base de datos!
       </div>
       <div class="my-2 text-left">
-        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clients/form']">Agregar Cliente</button>
+        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clients/form']" >Agregar Cliente</button>
+        <!-- <button class="btn btn-rounded btn-primary" type="button" (click)="open(content)" >Agregar Cliente</button> -->
+
+        
+
       </div>
     </div>
 </div>

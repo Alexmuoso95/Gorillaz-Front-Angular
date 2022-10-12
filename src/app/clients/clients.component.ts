@@ -1,20 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from './client'
 import { ClientService } from './client.service';
-import  swall from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
+
+import  swall from 'sweetalert2';
+//import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html'
-
 })
 export class ClientsComponent implements OnInit {
 
   clients : Client[] ;
   paginator : any;
   
-  constructor(private clientService : ClientService, private activatedRoute : ActivatedRoute) { }
+  closeResult : string;
+
+  constructor(private clientService : ClientService, private activatedRoute : ActivatedRoute,private activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -32,8 +36,8 @@ export class ClientsComponent implements OnInit {
 
   delete(client : Client ): void {
     swall.fire({
-      title: 'Estas segurisimo que quieres Eliminarlo ?',
-      text: `No se podra recuperar la informacion de ${client.name} ${client.lastName} `,
+      title: `Eliminar a ${client.name} ${client.lastName}  ? `,
+      text: 'No se podra recuperar la informacion!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, Eliminar!',
@@ -52,5 +56,22 @@ export class ClientsComponent implements OnInit {
        }
     })
   }
+  // open(content) {
+  //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  //     this.closeResult = `Closed with: ${result}`;
+  //   }, (reason) => {
+  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //   });
+  // }
+  
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC) {
+  //     return 'by pressing ESC';
+  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  //     return 'by clicking on a backdrop';
+  //   } else {
+  //     return `with: ${reason}`;
+  //   }
+  // }
 }
 

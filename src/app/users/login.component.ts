@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void {
     if(this.authService.isAuthenticated()){
-      swall.fire('Inicio de Sesion', `Hola ${this.authService.getUser.name}` + ' Ya has iniciado sesion', 'info')
+      swall.fire(`Hola ${this.authService.getUser.name}` + ' ya has iniciado sesion', '', 'info')
       this.router.navigate(['/clients/page/',0])
     }
   }
