@@ -18,8 +18,7 @@ import { LoginComponent } from './users/login.component';
 registerLocaleData(localES,'es');
 
 const routes: Routes = [
-  {path: '' , redirectTo: '/menu', pathMatch: 'full'},
-  //{path: 'clients', component: ClientsComponent},
+  {path: '' , redirectTo: 'login', pathMatch: 'full'},
   {path: 'clients/page/:page', component: ClientsComponent},
   {path: 'clients/form', component: FormComponent},
   {path: 'clients/form/:id', component: FormComponent},

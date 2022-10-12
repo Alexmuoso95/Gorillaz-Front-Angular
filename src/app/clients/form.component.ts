@@ -12,10 +12,10 @@ import { Observable } from 'rxjs';
 export class FormComponent implements OnInit {
 
   public client : Client = new Client();
-  public title : string = "Crear Cliente";
   private message : string ;
   
   constructor(private clientService: ClientService, private router : Router, private activatedRoute : ActivatedRoute) { }
+ 
   ngOnInit(): void {
     this.loadClient();
   }

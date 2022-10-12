@@ -1,18 +1,13 @@
-<div class="card text-black bg-white mb-3">
-    <div class="card-header">Clientes</div>
+<div class="container">
     <div class="card-body">
-      <h5 class="card-title">Clientes</h5>
-      <div class="my-2 text-left">
-        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clients/form']">Agregar Cliente</button>
-      </div>
       <table class="table table-bordered table-striped" style="text-align: center;">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Correo Electronico</th>
+                <th>Email</th>
                 <th>Telefono</th>
-                <th>Fecha de Registro</th>
+                <th>Fecha</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -20,12 +15,12 @@
             <tr *ngFor="let client of clients">
                 <td>{{client.id}}</td>
                 <td>{{client.name}} {{client.middleName}} {{client.lastName}}</td>
-                <td>{{client.phoneNumber}}</td>
                 <td>{{client.email}}</td>
-                <td>{{client.createAt | date:"EEEE dd, MMMM, yyyy"}}</td>
+                <td>{{client.phoneNumber}}</td>
+                <td>{{client.createAt | date:" dd-MM-yyyy"}}</td>
                 <td>
-                  <button type="button" name="Editar" [routerLink]="['/clients/form', client.id]" class="btn btn-primary btn-sm" style="margin: 5px"  >Editar</button>
-                  <button type="button" name="Eliminar" class="btn btn-danger btn-sm "  style="margin: 5px" (click)='delete(client)'>Eliminar</button>
+                  <button type="button" name="Editar" [routerLink]="['/clients/form', client.id]" class="btn btn-secondary btn-sm" style="margin: 2p; font-size: x-small;"  >Editar</button>
+                  <button type="button" name="Eliminar" class="btn btn-danger btn-sm "  style="margin: 2px;  font-size: x-small;" (click)='delete(client)'>Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -34,6 +29,8 @@
       <div *ngIf="clients?.length == 0 "  class="alert alert-info">
         No hay registros en la base de datos!
       </div>
+      <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clients/form']">Agregar Cliente</button>
+      </div>
     </div>
-   
 </div>

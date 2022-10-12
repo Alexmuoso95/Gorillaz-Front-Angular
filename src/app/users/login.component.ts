@@ -10,25 +10,32 @@ import { AuthService
 })
 export class LoginComponent implements OnInit {
 
-  title : string = 'Iniciar Sesion';
   user : User ;
   constructor(private router : Router, private authService : AuthService) { 
     this.user = new User();
   }
   ngOnInit(): void {
+    if(this.authService.isAuthenticated()){
+      swall.fire('Inicio de Sesion', `Hola ${this.authService.getUser.name}` + ' Ya has iniciado sesion', 'info')
+      this.router.navigate(['/clients/page/',0])
+    }
   }
 
   login(){
-    console.log(this.user);
     if(this.user.name == null || this.user.password ==null){
       swall.fire('Error iniciando sesion', 'Usuario o Contrasena estan vacios!', 'error');
       return;
     }
-    this.authService.login(this.user).subscribe(u => {
+    this.authService.login(this.user).subscribe(response =>{
+      console.log(response);
+      this.authService.saveUser(response.access_token);
+      this.authService.saveToken(response.access_token);
+      swall.fire(`Has iniciado sesion`,'', 'success')
       this.router.navigate(['/clients/page',0]);
-      let payload = JSON.parse(atob(u.access_token.split(".")[1]));
-      console.log(payload);
-      swall.fire('Inicio de Sesion', `Hola ${payload.user_name}` + ' has iniciado sesion con exito!', 'success')
+    }, err => {
+      if(err.status == 401 || err.status == 400){
+        swall.fire('Error al iniciar sesion' , 'Usuario o  contraseña Incorrectas!', 'error' );
+      }
     })
   }
 }
